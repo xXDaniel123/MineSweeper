@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+
+    text-align: center;
+    background-color: #fafafa;
+}
+
+h1 {
+    margin-top: 4%;
+}
+
+.container {
+    text-align: center;
+    display: inline-block;
+    left: 50%;
+    transform: (-50%, -50%);
+    margin-top: 5%;
+    font-size: 20px;
+    border-radius: 1%;
+    background-color: rgb(223, 190, 133);
+}
+
+td {
+    text-align: center;
+    transition: .2s;
+    cursor: pointer;
+}
+
+/* .cell {
+    min-width: 30px;
+    max-width: 30px;
+    padding: 20px;
+} */
+
+td:hover {
+    background-color: rgb(252, 244, 230);
+}
+
+.pressed {
+    background-color: rgb(203, 164, 93);
+    color: rgb(223, 190, 133);
+    cursor: auto;
+    transition: .2s;
+}
+
+.pressed:hover {
+    background-color: rgb(174, 142, 83);
+}
+
+.buttons-container {
+    margin-top: 5%;
+}
+
+.button {
+    width: 150px;
+    height: 40px;
+    border-radius: 6px;
+    margin: 0.5%;
+}
