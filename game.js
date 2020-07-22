@@ -1,12 +1,13 @@
 'use strict'
 
 var MINE = '💣'
+var FLAG = '⛳'
 
 var gBoard = [];
 
 var gLevel = {
     SIZE: 4,
-    MIMNES: 2
+    MINES: 2
 }
 
 var gGame = {
@@ -16,32 +17,29 @@ var gGame = {
     secsPassed: 0
 }
 
-var gBoard = buildBoard(gLevel.SIZE);
-
-renderBoard(gBoard)
 // ----------------------------------------------------------------
 
 function init() {
-    console.log('game start');
-
+    gBoard = buildBoard(gLevel.SIZE);
+    renderBoard(gBoard)
 }
 
 
 function renderBoard(board) {
 
     var strHTML = ``;
-
     for (var i = 0; i < board.length; i++) {
         strHTML += `<tr>`
 
         for (var j = 0; j < board[i].length; j++) {
+            strHTML += `<td class="cell cell-${i}-${j}" onclick="cellClicked(this,${i},${j})" oncontextmenu="cellMarked(this)">`
 
-            var checkIsMine = board[i][j].isMine
+            if (board[i][j].isMine) strHTML += `${MINE}`
+            if (!board[i][j].isMine) { // check for mines around cells which are not mines
 
-            strHTML += `<td class="cell ${i}-${j}" 
-            onclick="cellClicked(this,${i},${j})" 
-            oncontextmenu="cellMarked(this)">`
-            if (checkIsMine) strHTML += `${MINE}`
+                var neighborsSum = setMinesNegsCount(board, i, j)
+                strHTML += `${neighborsSum}`
+            }
         }
         strHTML += `</tr>`
     }
@@ -51,57 +49,58 @@ function renderBoard(board) {
 
 function buildBoard(difficulty) {
 
-    var mat = [];
+    var board = [];
     for (var i = 0; i < difficulty; i++) {
-        mat[i] = [];
+        board[i] = [];
         for (var j = 0; j < difficulty; j++) {
 
             var cell = {
                 minesAroundCount: null,
-                isShowen: true,
+                isShowen: false,
                 isMine: false,
                 isMarked: false
             }
-            mat[i][j] = cell
 
-            // setting bombs
-            if (i === 2 && j === 2) {
-                var currCell = mat[i][j];
-                currCell = cell.isMine = true
+            board[i][j] = cell
 
-            }
-            if (i === 3 && j === 1) {
-                var currCell = mat[i][j];
-                currCell = cell.isMine = true
-            }
+            // setting bombs - will set up random cells with bombs
+            if (i === 2 && j === 2) board[i][j].isMine = true
+            if (i === 3 && j === 1) board[i][j].isMine = true
         }
     }
-    return mat
+    return board
 }
 
-function cellClicked(ev, i, j) {
-    console.log('check click');
-    console.dir(ev);
-    console.log(i, j);
-
-}
-
-function setMinesNegsCount(board) {
+function setMinesNegsCount(board, cellI, cellJ) {
 
     var neighborsSum = 0;
-
     for (var i = cellI - 1; i <= cellI + 1; i++) {
         if (i < 0 || i >= board.length) continue;
         for (var j = cellJ - 1; j <= cellJ + 1; j++) {
-
             if (i === cellI && j === cellJ) continue;
             if (j < 0 || j >= board[i].length) continue;
-            if (board[i][j] === LIFE || board[i][j] === SUPER_LIFE) neighborsSum++;
+            if (board[i][j].isMine) neighborsSum++;
         }
-        return neighborsSum;
-
     }
+    return neighborsSum;
+}
+
+
+function cellClicked(ev, i, j) {
+    console.dir(ev);
+    console.log(i, j);
+
+    ev.classList.add('show')
+    gBoard[i][j].isShowen = true;
+
+    if (ev.innerHTML === '0') console.log('here will be show around');
+
+    // renderBoard(gBoard)
 
 }
 
-console.table(gBoard);
+function cellMarked(elCell) {
+    console.log(elCell);
+    console.dir(elCell);
+    console.dir('its working');
+}

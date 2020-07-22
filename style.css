@@ -1,8 +1,8 @@
 * {
     margin: 0;
-
     text-align: center;
     background-color: #fafafa;
+
 }
 
 h1 {
@@ -20,9 +20,14 @@ h1 {
     background-color: rgb(223, 190, 133);
 }
 
+.cell {
+    opacity: 0
+        /* color: #fafafa; */
+}
+
 td {
     text-align: center;
-    transition: .2s;
+    transition: .15s;
     cursor: pointer;
 }
 
@@ -56,4 +61,17 @@ td:hover {
     height: 40px;
     border-radius: 6px;
     margin: 0.5%;
+}
+
+/* .cell-0-0 {
+    visibility: hidden;
+} */
+
+.hide {
+    opacity: 0;
+}
+
+.show {
+    opacity: 1;
+
 }
