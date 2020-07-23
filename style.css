@@ -2,11 +2,21 @@
     margin: 0;
     text-align: center;
     background-color: #fafafa;
-
+    font-family: 'Verdana';
 }
 
 h1 {
-    margin-top: 4%;
+    margin-top: 2%;
+}
+
+.emoji {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.cell {
+    opacity: 0;
+
 }
 
 .container {
@@ -14,46 +24,24 @@ h1 {
     display: inline-block;
     left: 50%;
     transform: (-50%, -50%);
-    margin-top: 5%;
-    font-size: 20px;
+    margin-top: 2%;
+    font-size: 24px;
     border-radius: 1%;
-    background-color: rgb(223, 190, 133);
-}
-
-.cell {
-    opacity: 0
-        /* color: #fafafa; */
+    background-color: rgb(205, 205, 205);
 }
 
 td {
+    background-color: #dadada;
+    width: 30px;
+    height: 30px;
     text-align: center;
-    transition: .15s;
     cursor: pointer;
+    font-size: 14px;
 }
 
-/* .cell {
-    min-width: 30px;
-    max-width: 30px;
-    padding: 20px;
-} */
-
-td:hover {
-    background-color: rgb(252, 244, 230);
-}
-
-.pressed {
-    background-color: rgb(203, 164, 93);
-    color: rgb(223, 190, 133);
-    cursor: auto;
-    transition: .2s;
-}
-
-.pressed:hover {
-    background-color: rgb(174, 142, 83);
-}
 
 .buttons-container {
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .button {
@@ -63,9 +51,6 @@ td:hover {
     margin: 0.5%;
 }
 
-/* .cell-0-0 {
-    visibility: hidden;
-} */
 
 .hide {
     opacity: 0;
